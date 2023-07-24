@@ -4,16 +4,15 @@
 import '../lib/sqlconnection.dart';
 import '../lib/table.dart';
 
-main() async
-{
-   //var connstr = @"Server=DEVIL\\SQLEXPRESS;Database=Phoenix64;User Id=sa;Password=;";
-   SqlConnection conn = new SqlConnection("Server=localhost\\SQLEXPRESS;Database=Portento;Trusted_Connection=yes;");
+main() async {
+  //var connstr = @"Server=DEVIL\\SQLEXPRESS;Database=Phoenix64;User Id=sa;Password=;";
+  SqlConnection conn = new SqlConnection("Server=127.0.0.1:53353\\SQLEXPRESS;Database=Portento;Trusted_Connection=yes;");
 
-   await conn.open();
-      
-   print("connected");
-   
-   /*
+  await conn.open();
+
+  print("connected");
+
+  /*
    List rows = await conn.query("SELECT TOP 3 Id,Nome,Cognome FROM Comuni_Anagrafe");
       
    print("queried");
@@ -23,24 +22,23 @@ main() async
       print(r["Cognome"]);
    }
    */
-   
-   Table tab = await conn.queryTable("SELECT TOP 3 Id,Nome,Cognome FROM Comuni_Anagrafe");
-      
-   print("queried");
-   
-   for(var r in tab.rows)
-   {
-      print(r["Cognome"]);
-   }
-   
-   var r = tab.newRow();
-   r["Cognome"] = "pisapia";
-   r["Nome"] = "alessio";
-   tab.rows.add(r);
-   
-   await tab.post();
-      
-   /*
+
+  Table tab = await conn.queryTable("SELECT TOP 3 Id,Nome,Cognome FROM Comuni_Anagrafe");
+
+  print("queried");
+
+  for (var r in tab.rows) {
+    print(r["Cognome"]);
+  }
+
+  var r = tab.newRow();
+  r["Cognome"] = "pisapia";
+  r["Nome"] = "alessio";
+  tab.rows.add(r);
+
+  await tab.post();
+
+  /*
    var s = await conn.queryValue("SELECT DataStampa FROM Mag_DocMag WHERE DataStampa IS NOT NULL");
    
    assert(s is DateTime);
@@ -49,6 +47,6 @@ main() async
    
    await conn.close();
    */
-   
-   print("done");
+
+  print("done");
 }
